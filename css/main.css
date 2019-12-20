@@ -1,0 +1,458 @@
+@charset "utf-8";
+
+body {
+  background-image: url(../images/img1.jpg);
+  background-size: cover;
+  font-family: YuGothic, "Yu Gothic";
+  overflow: hidden;
+}
+
+.container {
+  width: 1300px;
+  height: 672px;
+  background: url(../images/16.png);
+  border-radius: 30px;
+  font-weight: bold;
+  position: relative;
+  left: 5vw;
+  top: -10px;
+}
+
+.flex {
+  display: flex;
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.left {
+  position: relative;
+  top: 7vh;
+}
+
+.right {
+  font-size: 40px;
+  position: relative;
+  top: 14vh;
+  left: 2vw;
+}
+
+.start {
+  border: 3px solid #000;
+  color: #000;
+  font-size: 30px;
+  border-radius: 50px;
+  padding: 30px 60px;
+  position: relative;
+  left: 10vw;
+  bottom: 12vh;
+}
+
+.start:hover {
+  color: #ed2553;
+  border-color: #ed2553;
+  transition: 0.5s;
+}
+
+.logo {
+  position: relative;
+  top: 12vh;
+}
+
+@keyframes loadingAnim {
+  0% {
+    width: 0;
+  }
+  75% {
+    width: 80%;
+    transform: translate(85%);
+  }
+  100% {
+    width: 100%;
+    transform: translate(100%);
+  }
+}
+@keyframes loadingAnim_text {
+  0% {
+    opacity: 1;
+    color: #cba166;
+  }
+  50% {
+    color: #333;
+  }
+  100% {
+    opacity: 0.5;
+    color: gray;
+  }
+}
+
+::selection {
+  background-color: rgba(0, 105, 255, 0.3);
+}
+
+.loadingAnim {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.loadingAnim_line {
+  line-height: 1;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  overflow: hidden;
+  width: 150px;
+  height: 1em;
+  margin: auto;
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  transition-delay: 0.6s;
+  text-align: center;
+}
+
+.loadingAnim_line:after {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 100%;
+  margin: auto auto auto 0;
+  content: " ";
+  animation: loadingAnim 2s ease-in-out 0.1s infinite normal backwards;
+  background-color: #fff;
+  will-change: transform, width;
+}
+
+.loadingAnim_line:before {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1;
+  display: block;
+  content: "LOADING";
+  animation: loadingAnim_text 1s ease 0.1s infinite alternate both;
+  letter-spacing: 0.5em;
+  color: #fff;
+  will-change: opacity;
+}
+
+.loaded .loadingAnim_line {
+  overflow: hidden;
+  height: 0;
+}
+
+.loaded .loadingAnim_line:after,
+.loaded .loadingAnim_line:before {
+  animation: none;
+}
+
+.loaded .loadingAnim_line:before {
+  content: "LOADED!";
+}
+
+.loadingAnim:before,
+.loadingAnim:after {
+  line-height: 1;
+  position: fixed;
+  z-index: 99;
+  right: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  content: " ";
+  transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  transition-delay: 0.3s;
+  background-color: #ffd700;
+}
+.loadingAnim:before {
+  top: 0;
+}
+.loadingAnim:after {
+  bottom: 0;
+}
+
+.loaded .loadingAnim:before {
+  height: 0;
+  transform: translateY(-1%);
+}
+.loaded .loadingAnim:after {
+  height: 0;
+  transform: translateY(1%);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contents {
+  display: table;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  transition-property: all;
+  transition-delay: 0.3s;
+  transition-duration: 0.5s;
+}
+
+.contents__inner {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.contents__inner p span {
+  border-bottom: 1px solid #fff;
+}
+
+.drawer-menu {
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  padding: 120px 0;
+  background: #222;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-delay: 0s;
+  transform-origin: right center;
+  transform: perspective(500px) rotateY(-90deg);
+  opacity: 0;
+}
+
+.drawer-menu li {
+  text-align: center;
+}
+
+.drawer-menu li a {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.8s;
+}
+
+.drawer-menu li a:hover {
+  color: #1a1e24;
+  background: #fff;
+}
+
+.check {
+  display: none;
+}
+
+.menu-btn {
+  position: fixed;
+  display: block;
+  top: 40px;
+  right: 40px;
+  display: block;
+  width: 40px;
+  height: 40px;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: #fff;
+  transition: all 0.5s;
+  transform-origin: left top;
+}
+
+.bar.middle {
+  top: 15px;
+  opacity: 1;
+}
+
+.bar.bottom {
+  top: 30px;
+  transform-origin: left bottom;
+}
+
+.menu-btn__text {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: #fff;
+  transition: all 0.5s;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu-btn:hover .bar {
+  background: #999;
+}
+
+.menu-btn:hover .menu-btn__text {
+  color: #999;
+}
+
+.close-menu {
+  position: fixed;
+  top: 0;
+  right: 300px;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  cursor: url(http://theorthodoxworks.com/demo/images/cross.svg), auto;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-delay: 0s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.check:checked ~ .drawer-menu {
+  transition-delay: 0.3s;
+  transform: none;
+  opacity: 1;
+  z-index: 2;
+}
+
+.check:checked ~ .contents {
+  transition-delay: 0s;
+  transform: translateX(-300px);
+}
+
+.check:checked ~ .menu-btn .menu-btn__text {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.check:checked ~ .menu-btn .bar.top {
+  width: 56px;
+  transform: rotate(45deg);
+}
+
+.check:checked ~ .menu-btn .bar.middle {
+  opacity: 0;
+}
+
+.check:checked ~ .menu-btn .bar.bottom {
+  width: 56px;
+  top: 40px;
+  transform: rotate(-45deg);
+}
+
+.check:checked ~ .close-menu {
+  transition-duration: 1s;
+  transition-delay: 0.3s;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+  opacity: 1;
+  z-index: 3;
+}
+
+input,
+input::after {
+  transition: all 0.3s;
+}
+
+input {
+  background: none;
+  border: 1px solid #fff;
+  border-radius: 50px;
+  padding: 20px 30px;
+  margin-top: 30px;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+input::before,
+input::after {
+  background: #fff;
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+
+input:hover {
+  color: #ed2553;
+  border-color: #ed2553;
+  transition: 0.5s;
+}
+
+.earth {
+  position: absolute;
+  left: 215px;
+  bottom: 45%;
+}
+
+.img_box {
+  animation: img_box 5s linear infinite;
+  transform-origin: 50% 50%;
+  margin: 1rem 0;
+}
+
+@keyframes img_box {
+  0% {
+    transform: translateY(0);
+  }
+  33.33333% {
+    transform: translateY(12px);
+  }
+  66.66667% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.runa {
+  margin-left: 2.55vw;
+}
+
+.u_name {
+  margin: 30px 0 30px 60px;
+  color: #fff;
+  font-size: 20px;
+}
+
+@keyframes spn {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
